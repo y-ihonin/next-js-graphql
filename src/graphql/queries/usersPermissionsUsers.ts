@@ -7,3 +7,20 @@ export const usersPermissionsUsersQuery = gql(`
     }
   }
 `);
+
+export const usersPermissionsMeQuery = gql(`
+  query usersPermissionsMe {
+    me {
+      documentId
+      email
+      id
+      role {
+        description
+        id
+        name
+        type
+      }
+      username
+    }
+  }
+`);

@@ -3,7 +3,7 @@
 import React, { Suspense } from "react";
 import { useQuery, useSuspenseQuery } from "@apollo/client";
 
-import { ApolloWrapper } from "@/lib//ApolloWrapper";
+import { ApolloWrapper } from "@/lib/ApolloWrapper";
 
 // helpers
 import { usersPermissionsUsersQuery } from "@/graphql/queries/usersPermissionsUsers";
@@ -14,7 +14,7 @@ import { usersPermissionsUsersQuery } from "@/graphql/queries/usersPermissionsUs
 function SuspenseQueryUser({ children }: React.PropsWithChildren) {
   const result = useSuspenseQuery(usersPermissionsUsersQuery, { fetchPolicy: "cache-first" });
 
-  console.log("SuspenseQueryUser", result)
+  // console.log("SuspenseQueryUser", result)
 
   return (
     <>
@@ -26,7 +26,7 @@ function SuspenseQueryUser({ children }: React.PropsWithChildren) {
 function QueryUser({ children }: React.PropsWithChildren) {
   const result = useQuery(usersPermissionsUsersQuery, { fetchPolicy: "cache-first" });
 
-  console.log("QueryUser", result)
+  // console.log("QueryUser", result)
 
   return (
     <>
@@ -39,11 +39,11 @@ const TestClientComponent = () => {
   return (
     <ApolloWrapper>
       <div>
-        <Suspense>
+        {/* <Suspense>
           <SuspenseQueryUser>
             Suspense Test
           </SuspenseQueryUser>
-        </Suspense>
+        </Suspense> */}
         <QueryUser>
           Query Test
         </QueryUser>
