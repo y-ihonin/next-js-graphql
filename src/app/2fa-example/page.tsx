@@ -2,6 +2,7 @@
 
 
 import { useState } from "react";
+import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 
@@ -36,7 +37,7 @@ export default function Example2FA() {
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <span>1. Scan the QR code with Google Authenticator:</span>
-            <img src={qrData} alt="2FA QR Code" />
+            <Image src={qrData || ""} alt="2FA QR Code" width={192} height={192} />
           </div>
           <div className="flex flex-col gap-2">
             <span>2. Enter the 6-digits code from Google Authenticator:</span>
