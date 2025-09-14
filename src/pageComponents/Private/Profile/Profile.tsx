@@ -24,7 +24,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { disable2FAMutation } from "@/graphql/mutations/enable2FA copy";
+import { disable2FAMutation } from "@/graphql/mutations/disable2FA";
 
 // validation schema
 const profileSchema = z.object({
