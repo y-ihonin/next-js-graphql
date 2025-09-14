@@ -17,25 +17,25 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 // hooks
-import useSignInForm from "./useForm";
+import useSignUpForm from "./useForm";
 import { useToast } from "@/hooks/use-toast"
 
 // utils
 import apolloErrorHandler from '@/utils/apolloErrorHandler';
 
 // graphql
-import { signInMutation } from "@/graphql/mutations/signIn";
+import { signUpMutation } from "@/graphql/mutations/signUp";
 
 // types
-import { ISignInForm, ISignInFormValues } from './ISignInForm';
+import { ISignUpForm, ISignUpFormValues } from './ISignUpForm';
 
-const SignInForm = ({ onSuccess }: ISignInForm) => {
-  const { control, handleSubmit, errors } = useSignInForm();
+const SignUpForm = ({ onSuccess }: ISignUpForm) => {
+  const { control, handleSubmit, errors } = useSignUpForm();
   const { toast } = useToast()
 
-  const [login, { loading }] = useMutation(signInMutation, {
+  const [register, { loading }] = useMutation(signUpMutation, {
     onCompleted: (data) => {
-      onSuccess(data.login);
+      onSuccess(data.register);
     },
     onError: (err) => {
       const errorMessage = apolloErrorHandler(err);
@@ -49,27 +49,47 @@ const SignInForm = ({ onSuccess }: ISignInForm) => {
     }
   });
 
-  const onSubmit = (data: ISignInFormValues) => {
+  const onSubmit = (data: ISignUpFormValues) => {
     const payload = {
-      identifier: data.email,
+      username: data.username,
+      email: data.email,
       password: data.password,
     }
 
-    login({ variables: { input: payload } })
+    register({ variables: { input: payload } })
   };
 
   // render  
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-2xl">Login</CardTitle>
+        <CardTitle className="text-2xl">Sign Up</CardTitle>
         <CardDescription>
-          Enter your email below to login to your account
+          Create your account to get started
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-6">
+            <div className="grid gap-2">
+              <Label htmlFor="username">Username</Label>
+              <Controller
+                name="username"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    id="username"
+                    type="text"
+                    placeholder="johndoe"
+                    required
+                    {...field}
+                  />
+                )}
+              />
+              {errors.username && (
+                <p className="text-red-500">{errors.username.message}</p>
+              )}
+            </div>
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Controller
@@ -90,15 +110,7 @@ const SignInForm = ({ onSuccess }: ISignInForm) => {
               )}
             </div>
             <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                {/* <Link
-                  href="#"
-                  className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                >
-                  Forgot your password?
-                </Link> */}
-              </div>
+              <Label htmlFor="password">Password</Label>
               <Controller
                 name="password"
                 control={control}
@@ -115,13 +127,13 @@ const SignInForm = ({ onSuccess }: ISignInForm) => {
               className="w-full"
               disabled={loading}
             >
-              {loading ? 'Loading...' : 'Login'}
+              {loading ? 'Creating Account...' : 'Sign Up'}
             </Button>
           </div>
           <div className="mt-4 text-center text-sm">
-            Don&apos;t have an account?{" "}
-            <Link href="/sign-up" className="underline underline-offset-4">
-              Sign up
+            Already have an account?{" "}
+            <Link href="/sign-in" className="underline underline-offset-4">
+              Sign in
             </Link>
           </div>
         </form>
@@ -130,4 +142,4 @@ const SignInForm = ({ onSuccess }: ISignInForm) => {
   )
 }
 
-export default SignInForm;
+export default SignUpForm;

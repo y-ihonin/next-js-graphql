@@ -218,13 +218,17 @@ const Profile = () => {
                   </p>
                 </div>
                 <div className="flex justify-center">
-                  <Image
-                    src={qrCodeUrl || ""}
-                    alt="2FA QR Code"
-                    className="h-48 w-48 rounded-lg border"
-                    width={192}
-                    height={192}
-                  />
+                  {
+                    qrCodeUrl && (
+                      <Image
+                        src={qrCodeUrl || ""}
+                        alt="2FA QR Code"
+                        className="h-48 w-48 rounded-lg border"
+                        width={192}
+                        height={192}
+                      />
+                    )
+                  }
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="twoFactorCode" className="text-sm font-medium">
