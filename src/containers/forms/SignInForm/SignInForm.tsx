@@ -80,6 +80,7 @@ const SignInForm = ({ onSuccess }: ISignInForm) => {
                     id="email"
                     type="email"
                     placeholder="m@example.com"
+                    data-testid="email-input"
                     required
                     {...field}
                   />
@@ -103,7 +104,13 @@ const SignInForm = ({ onSuccess }: ISignInForm) => {
                 name="password"
                 control={control}
                 render={({ field }) => (
-                  <Input id="password" type="password" required {...field} />
+                  <Input
+                    id="password"
+                    type="password"
+                    required
+                    data-testid="password-input"
+                    {...field}
+                  />
                 )}
               />
               {errors.password && (
@@ -114,6 +121,7 @@ const SignInForm = ({ onSuccess }: ISignInForm) => {
               type="submit"
               className="w-full"
               disabled={loading}
+              data-testid="login-button"
             >
               {loading ? 'Loading...' : 'Login'}
             </Button>
