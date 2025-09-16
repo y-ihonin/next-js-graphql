@@ -79,7 +79,7 @@ const SignInForm = ({ onSuccess }: ISignInForm) => {
                   <Input
                     id="email"
                     type="email"
-                    placeholder="m@example.com"
+                    placeholder="mail@example.com"
                     data-testid="email-input"
                     required
                     {...field}
