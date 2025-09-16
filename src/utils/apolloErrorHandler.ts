@@ -1,5 +1,4 @@
 import { ApolloError } from "@apollo/client";
-import get from "lodash/get";
 
 
 const apolloErrorHandler = (err: ApolloError): string => {
@@ -41,8 +40,8 @@ const apolloErrorHandler = (err: ApolloError): string => {
           return message;
         }
 
-        if (get(graphQLError, "extensions.error.message")) {
-          return get(graphQLError, "extensions.error.message", "") as string;
+        if ((graphQLError?.extensions?.error as { message: string })?.message) {
+          return (graphQLError?.extensions?.error as { message: string })?.message || "" as string;
         }
        
         // For other GraphQL errors, return the message as-is
