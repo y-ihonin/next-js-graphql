@@ -41,7 +41,7 @@ jobs:
 
       - name: Run tests with coverage
         if: ${{ inputs.run_tests }}
-        run: npm test:ci
+        run: npm run test:ci
 
   summary:
     runs-on: ubuntu-latest
